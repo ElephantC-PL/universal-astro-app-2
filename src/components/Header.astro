@@ -1,29 +1,31 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+ 
+import {getLinkWithLang} from "../utilities/i18n"
+
+const about = getLinkWithLang(Astro.url, "about")
+const home = getLinkWithLang(Astro.url, "")
+
 ---
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<h2><a href={home}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href={home}>Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href={about}>About</HeaderLink>
 		</div>
 		<div class="social-links">
-			<a href="" target="_blank">
-				<span class="sr-only">Follow Astro on Mastodon</span>
+			<a href="/">
+				<span class="sr-only">Polski</span>
 				PL
 			</a>
-			<a href="" target="_blank">
-				<span class="sr-only">Follow Astro on Twitter</span>
+			<a href="/en">
+				<span class="sr-only">Engish</span>
 				EN
-			</a>
-			<a href="" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
-				UK
-			</a>
+			</a>			
 		</div>
 	</nav>
 </header>
