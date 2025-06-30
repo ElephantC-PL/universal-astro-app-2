@@ -6,6 +6,7 @@ import {getLinkWithLang} from "../utilities/i18n"
 
 const about = getLinkWithLang(Astro.url, "about")
 const home = getLinkWithLang(Astro.url, "")
+const blog = getLinkWithLang(Astro.url, "blog")
 
 ---
 
@@ -14,9 +15,10 @@ const home = getLinkWithLang(Astro.url, "")
 		<h2><a href={home}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href={home}>Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href={blog}>Blog</HeaderLink>
 			<HeaderLink href={about}>About</HeaderLink>
 		</div>
+		<astro:language-switcher />
 		<div class="social-links">
 			<a href="/">
 				<span class="sr-only">Polski</span>
