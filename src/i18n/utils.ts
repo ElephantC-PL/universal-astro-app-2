@@ -1,14 +1,7 @@
-// const definedLanguages = ["en"]
-
-// export function getLangFromUrl(url: URL) {
-//   const [, lang] = url.pathname.split('/');
-//   return lang;
-// }
-
 import { ui, defaultLang } from './ui';
 
 export function getLinkWithLang(lang: keyof typeof ui, path: string) {  
-  return (lang === defaultLang ? "": `/${lang}`) + "/" + path;
+  return  `/${lang}` + "/" + path;
 }
 
 export function getLangFromUrl(url: URL) {
@@ -25,6 +18,6 @@ export function useTranslations(lang: keyof typeof ui) {
 
 export function getSameUrlInNewLang(url: URL, newLang: keyof typeof ui) {
     const prevLang = getLangFromUrl(url);
-    const urlWithoutLang = (`${url.pathname}`).substring(prevLang === defaultLang ? 1 : (prevLang.length + 2));
+    const urlWithoutLang = (`${url.pathname}`).substring((prevLang.length + 2));
     return  getLinkWithLang(newLang, urlWithoutLang);
 }
