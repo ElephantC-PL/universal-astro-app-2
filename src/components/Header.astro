@@ -1,30 +1,34 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
- 
-import {getLinkWithLang} from "../utilities/i18n"
+import { SITE_TITLE } from '../consts'; 
+import {getLangFromUrl, useTranslations, getLinkWithLang, getSameUrlInNewLang} from "../i18n/utils";
 
-const about = getLinkWithLang(Astro.url, "about")
-const home = getLinkWithLang(Astro.url, "")
-const blog = getLinkWithLang(Astro.url, "blog")
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const homeLink = getLinkWithLang(lang, '')
+const blogLink = getLinkWithLang(lang, 'blog')
+const aboutLink = getLinkWithLang(lang, 'about')
+const switchPL = getSameUrlInNewLang(Astro.url, 'pl')
+const switchEn = getSameUrlInNewLang(Astro.url, 'en')
 
 ---
 
 <header>
 	<nav>
-		<h2><a href={home}>{SITE_TITLE}</a></h2>
+		<h2><a href={`/${lang}/home`}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href={home}>Home</HeaderLink>
-			<HeaderLink href={blog}>Blog</HeaderLink>
-			<HeaderLink href={about}>About</HeaderLink>
+			<HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
+			<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>
+			<HeaderLink href={aboutLink}>{t('nav.about')}</HeaderLink>
 		</div>
 		<astro:language-switcher />
 		<div class="social-links">
-			<a href="/">
+			<a href={switchPL}>
 				<span class="sr-only">Polski</span>
 				PL
 			</a>
-			<a href="/en">
+			<a href={switchEn}>
 				<span class="sr-only">Engish</span>
 				EN
 			</a>			
