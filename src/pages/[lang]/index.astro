@@ -1,0 +1,24 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+import AboutHeroImage from '../../assets/blog-placeholder-about.jpg';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'pl'}}, 
+	{ params: { lang: 'en'}},  
+	] 
+}
+
+const { lang} = Astro.params;
+---
+<Layout
+	title="Home"
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}
+	heroImage={AboutHeroImage}
+>
+<h2>Home</h2>
+	<p>
+		Lang: {lang} <br />		
+	</p>
+</Layout>
