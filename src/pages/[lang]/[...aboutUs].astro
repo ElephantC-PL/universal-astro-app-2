@@ -5,18 +5,18 @@ import { AstroError } from 'astro/errors';
 import { getEntry, render } from 'astro:content';
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: 'pl'}}, 
-	{ params: { lang: 'en'}},  
+  return [     
+	{ params: { lang: 'pl', aboutUs: 'about' }},
+	{ params: { lang: 'en', aboutUs: 'about' }},  
 	] 
 }
 
-const { lang} = Astro.params;
+const { lang, aboutUs } = Astro.params;
 
-const entry = await getEntry('home', lang);
+const entry = await getEntry('aboutUs', lang);
 
 if (!entry) {
-  throw new AstroError(`No home content for lang=${lang}`);
+  throw new AstroError(`No aboutUs content for lang=${lang}`);
 }
 
 const { Content } = await render(entry);
@@ -28,7 +28,8 @@ const { Content } = await render(entry);
 	heroImage={AboutHeroImage}
 >
 	<p>
-		Lang: {lang} <br />		
-	</p>
+		Lang: {lang} <br />
+		About: {aboutUs}
+	</p>	
 	<Content />
 </Layout>

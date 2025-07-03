@@ -15,13 +15,24 @@ const blog = defineCollection({
 	}),
 });
 
-const plTest = defineCollection({
+const home = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/plTest', pattern: '**/*.{md,mdx,astro}' }),
+	loader: glob({ base: './src/content/home', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema
 	schema: () => z.object({
-		title: z.string(),		
+		title: z.string(),	
+		lang: z.string()	
 	}),
 });
 
-export const collections = { blog, plTest };
+const aboutUs = defineCollection({
+	// Load Markdown and MDX files in the `src/content/blog/` directory.
+	loader: glob({ base: './src/content/aboutUs', pattern: '**/*.{md,mdx}' }),
+	// Type-check frontmatter using a schema	
+	schema: () => z.object({
+		title: z.string(),	
+		lang: z.string()	
+	}),
+});
+
+export const collections = { blog, home, aboutUs };
