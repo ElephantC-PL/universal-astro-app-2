@@ -1,22 +1,31 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts'; 
-import {getLangFromUrl, useTranslations, getLinkWithLang, getSameUrlInNewLang} from "../i18n/utils";
+import { useTranslations, getTranslatedPath, getRouteFromTranslatedPath} from "../i18n/utils";
+import type { Lang } from '../i18n/languages';
+import { AstroError } from 'astro/errors';
 
-const lang = getLangFromUrl(Astro.url);
+const currentRoute = getRouteFromTranslatedPath(Astro.url)
+
+const lang = Astro.currentLocale as Lang;
+
+if (!currentRoute) {
+  throw new AstroError(`No aboutUs content for lang=${currentRoute}`);
+}
+
 const t = useTranslations(lang);
 
-const homeLink = getLinkWithLang(lang, '')
-const blogLink = getLinkWithLang(lang, 'blog')
-const aboutLink = getLinkWithLang(lang, 'about')
-const switchPL = getSameUrlInNewLang(Astro.url, 'pl')
-const switchEn = getSameUrlInNewLang(Astro.url, 'en')
+const homeLink = getTranslatedPath(lang)
+const blogLink = getTranslatedPath(lang, 'blog')
+const aboutLink = getTranslatedPath(lang, 'aboutUs')
+const switchPL = getTranslatedPath('pl', currentRoute)
+const switchEn = getTranslatedPath('en', currentRoute)
 
 ---
 
 <header>
 	<nav>
-		<h2><a href={`/${lang}/home`}>{SITE_TITLE}</a></h2>
+		<h2><a href={homeLink}>{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
 			<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>

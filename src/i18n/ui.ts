@@ -3,8 +3,6 @@ export const languages = {
     en: 'English'  
 };
 
-export const defaultLang = 'pl';
-
 export const ui = {
     pl: {
         'nav.home': 'Start',

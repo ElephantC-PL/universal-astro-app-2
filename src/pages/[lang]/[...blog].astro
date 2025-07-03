@@ -1,14 +1,12 @@
 ---
 import Layout from '../../layouts/BlogPost.astro';
 import AboutHeroImage from '../../assets/blog-placeholder-about.jpg';
+import { getTranslatedPaths } from '../../i18n/utils';
 
 export function getStaticPaths() {
-  return [     
-	{ params: { lang: 'pl', blog: 'blog' }},
-	{ params: { lang: 'en', blog: 'blog' }},  
-	] 
+	const params = getTranslatedPaths('blog')	
+  	return params;
 }
-
 const { lang, blog } = Astro.params;
 ---
 <Layout

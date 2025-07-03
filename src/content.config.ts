@@ -20,8 +20,7 @@ const home = defineCollection({
 	loader: glob({ base: './src/content/home', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema
 	schema: () => z.object({
-		title: z.string(),	
-		lang: z.string()	
+		title: z.string(),			
 	}),
 });
 
@@ -30,8 +29,7 @@ const aboutUs = defineCollection({
 	loader: glob({ base: './src/content/aboutUs', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
-		title: z.string(),	
-		lang: z.string()	
+		title: z.string(),			
 	}),
 });
 
