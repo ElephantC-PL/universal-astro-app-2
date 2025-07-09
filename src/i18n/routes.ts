@@ -31,6 +31,22 @@ export const routes: Routes = {
     en: 'blog',
     children: blogRoutes
   },
+   deep: {
+    pl: 'gleboko',
+    en: 'deep',
+    children: {
+      deeper: {
+        pl: 'glebiej',
+        en: 'deeper',
+        children: {
+          nested: {
+            pl: 'zagniezdzone',
+            en: 'nested',
+          }
+        }
+      }
+    }
+  },
 };
 
 

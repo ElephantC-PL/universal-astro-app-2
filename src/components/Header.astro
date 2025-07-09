@@ -18,6 +18,7 @@ const t = useTranslations(lang);
 const homeLink = getTranslatedPath(lang)
 const blogLink = getTranslatedPath(lang, 'blog')
 const aboutLink = getTranslatedPath(lang, 'aboutUs')
+const nestedLink = getTranslatedPath(lang, ['deep','deeper', 'nested'])
 const switchPL = getTranslatedPath('pl', currentRoute)
 const switchEn = getTranslatedPath('en', currentRoute)
 
@@ -30,6 +31,7 @@ const switchEn = getTranslatedPath('en', currentRoute)
 			<HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
 			<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>
 			<HeaderLink href={aboutLink}>{t('nav.about')}</HeaderLink>
+			<HeaderLink href={nestedLink}>{t('nav.nested')}</HeaderLink>
 		</div>
 		<astro:language-switcher />
 		<div class="social-links">
