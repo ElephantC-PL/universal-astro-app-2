@@ -81,3 +81,30 @@ export function getRouteFromTranslatedPath(path: URL): string[] | null {
 
   return keys;
 }
+
+export function getOneLanguageVersionPerPost<T extends { id: string }>(posts: T[], lang: string): T[] {
+  const postsByTitle = new Map<string, T[]>();
+
+  for (const post of posts) {
+    const [title, postLang] = post.id.split('/') as [string, Lang];
+    if (!postsByTitle.has(title)) {
+      postsByTitle.set(title, []);
+    }
+    postsByTitle.get(title)!.push(post);
+  }
+
+  const result: T[] = [];
+
+  for (const [title, variants] of postsByTitle.entries()) {
+    let post = variants.find(p => p.id.endsWith(`/${lang}`));
+    if (!post) {
+      post = variants.find(p => p.id.endsWith(`/${defaultLang}`));
+    }
+    if (!post) {
+      post = variants[0];
+    }
+    result.push(post);
+  }
+
+  return result;
+}
