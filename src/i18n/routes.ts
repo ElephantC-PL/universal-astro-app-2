@@ -11,14 +11,22 @@ export type Routes = {
 };
 
 export const blogRoutes: Routes = {
-  firstPost: {
+  firstpost: {
     pl: 'pierwszy-wpis',
     en: 'first-post',   
   },
-  secendPost: {
+  secondpost: {
     pl: 'drugi-wpis',
-    en: 'secend-post', 
+    en: 'second-post', 
   },
+  thirdpost: {
+    pl: 'trzeci-wpis',
+    en: 'third-post', 
+  },
+  markdownstyleguide: {
+    pl: 'stylowanie-markdown',
+    en: 'markdown-style-guide', 
+  }
 };
 
 export const routes: Routes = {

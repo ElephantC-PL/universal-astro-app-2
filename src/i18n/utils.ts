@@ -10,7 +10,7 @@ export function useTranslations(lang: keyof typeof ui) {
   }
 }
 
-export function getTranslatedPath(lang: Lang, keys?: string | string[]): string {
+export function getTranslatedPath(lang: string, keys?: string | string[]): string {
   if (!keys) {
     return `/${lang}`;
   }
@@ -24,7 +24,7 @@ export function getTranslatedPath(lang: Lang, keys?: string | string[]): string 
     if (!node || !(lang in node)) {
       throw new Error(`Missing translation for key "${key}" in language "${lang}"`);
     }
-    pathParts.push(node[lang]);
+    pathParts.push(node[lang as Lang]);
     current = node.children;
   }
 
@@ -107,4 +107,8 @@ export function getOneLanguageVersionPerPost<T extends { id: string }>(posts: T[
   }
 
   return result;
+}
+
+export function extractPostTitleFromId(id: string): string {
+  return id.split('/')[0];
 }
