@@ -54,6 +54,44 @@ export function getTranslatedPaths(keys?: string | string[]): { params: Record<s
   });
 }
 
+export function getTranslatedPathsFromArticles(
+  keys: [string, Routes]
+): { params: Record<string, string> }[] {
+  const [parentKey, articles] = keys;
+
+  const articleKeys = Object.keys(articles);
+  const result: { params: Record<string, string> }[] = [];
+
+  for (const lang of allLanguages) {
+    const parentNode = routes[parentKey];
+
+    if (!parentNode || !(lang in parentNode)) {
+      throw new Error(`Missing translation for key '${parentKey}' in language '${lang}'`);
+    }
+
+    const baseParams: Record<string, string> = {
+      lang,
+      [parentKey]: parentNode[lang],
+    };
+
+    for (const articleKey of articleKeys) {
+      const node = articles[articleKey];
+      if (!node || !(lang in node)) {
+        throw new Error(`Missing translation for article '${articleKey}' in language '${lang}'`);
+      }
+
+      result.push({
+        params: {
+          ...baseParams,
+          slug: node[lang],
+        },
+      });
+    }
+  }
+
+  return result;
+}
+
 export function getRouteFromTranslatedPath(path: URL): string[] | null {
   const parts = path.pathname.replace(/^\/|\/$/g, '').split('/');
   const possibleLang = parts[0];

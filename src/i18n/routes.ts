@@ -10,7 +10,7 @@ export type Routes = {
   [key: string]: RouteNode;
 };
 
-export const blogRoutes: Routes = {
+export const blogRoutes: Routes = {  
   firstpost: {
     pl: 'pierwszy-wpis',
     en: 'first-post',   
