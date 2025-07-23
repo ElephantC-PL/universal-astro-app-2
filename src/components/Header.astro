@@ -1,7 +1,7 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts'; 
-import { useTranslations, getTranslatedPath, getRouteFromTranslatedPath} from "../i18n/utils";
+import { useTranslations, getTranslatedUrl, getRouteFromTranslatedPath} from "../i18n/utils";
 import type { Lang } from '../i18n/languages';
 import { AstroError } from 'astro/errors';
 
@@ -15,12 +15,12 @@ if (!currentRoute) {
 
 const t = useTranslations(lang);
 
-const homeLink = getTranslatedPath(lang)
-const blogLink = getTranslatedPath(lang, 'blog')
-const aboutLink = getTranslatedPath(lang, 'aboutUs')
-const nestedLink = getTranslatedPath(lang, ['deep','deeper', 'nested'])
-const switchPL = getTranslatedPath('pl', currentRoute)
-const switchEn = getTranslatedPath('en', currentRoute)
+const homeLink = getTranslatedUrl(lang)
+const blogLink = getTranslatedUrl(lang, 'blog')
+const aboutLink = getTranslatedUrl(lang, 'aboutUs')
+const nestedLink = getTranslatedUrl(lang, ['deep','deeper', 'nested'])
+const switchPL = getTranslatedUrl('pl', currentRoute)
+const switchEn = getTranslatedUrl('en', currentRoute)
 
 ---
 

@@ -1,39 +1,27 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection} from 'astro:content';
 import BlogPost from '../../../layouts/BlogPost.astro';
 import { render } from 'astro:content';
-import { getTranslatedPathsFromArticles, getOneLanguageVersionPerPost, extractPostTitleFromId, getTranslatedPath } from '../../../i18n/utils';
-import Layout from '../../../layouts/BlogPost.astro';
-import { blogRoutes } from '../../../i18n/routes';
+import { getTranslatedPath} from '../../../i18n/utils';
 
-
-
-export function getStaticPaths() {	
-	const params = getTranslatedPathsFromArticles(['blog', blogRoutes]);
-
-  	return params;
+export async function getStaticPaths() {	
+	const posts = await getCollection('blog');	
+	return posts.map((post: CollectionEntry<'blog'>) => {
+		const postId = post.id.split('/')[0];
+		const lang = post.id.split('/')[1];	
+		const { [postId]: translatedPostName, ...rest } = getTranslatedPath(lang, ['blog', postId])
+		return {
+			params:  { ...rest, slug: translatedPostName },
+			props: post,
+		};
+	});
 }
+type Props = CollectionEntry<'blog'>;
 
-const { lang, blog, slug} = Astro.params;
+const post = Astro.props;
+const { Content } = await render(post);
 
-// const entry = await getEntry('nested', lang);
-
-// if (!entry) {
-//   throw new AstroError(`No nested content for lang=${lang}`);
-// }
-
-//const { Content } = await render(entry);
 ---
-<Layout
-	title={'title'}
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	
->
-	<p>
-		Lang: {lang} <br />
-		Deep: {blog} <br/>	
-        Deeper: {JSON.stringify(slug, null, 2)} <br/>		
-	</p>	
-	
-</Layout>
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>
