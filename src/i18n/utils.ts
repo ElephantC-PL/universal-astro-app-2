@@ -10,11 +10,6 @@ export function useTranslations(lang: keyof typeof ui) {
   }
 }
 
-export function getTranslatedUrl(lang: string, keys?: string | string[]): string {
-  const params = getTranslatedPath(lang, keys);
-  return '/' + Object.values(params).join('/');
-}
-
 export function getTranslatedPath(lang: string, keys?: string | string[]): Record<string, string> {
 if (!keys) {
     return {lang: lang};
@@ -39,27 +34,16 @@ if (!keys) {
   }
 }
 
-export function getTranslatedPaths(keys?: string | string[]): { params: Record<string, string> }[] {
-  const keyPath = keys
-    ? Array.isArray(keys) ? keys : [keys]
-    : [];
 
-  return allLanguages.map((lang) => {
-    let current: Routes | undefined = routes;
-    const params: Record<string, string> = { lang };
+export function getTranslatedUrl(lang: string, keys?: string | string[]): string {
+  const params = getTranslatedPath(lang, keys);
+  return '/' + Object.values(params).join('/');
+}
 
-    for (const key of keyPath) {
-      const node: RouteNode | undefined = current?.[key];
-      if (!node || !(lang in node)) {
-        throw new Error(`Missing translation for key '${key}' in language '${lang}'`);
-      }
-
-      params[key] = node[lang];
-      current = node.children;
-    }
-
-    return { params };
-  });
+export function getAllTranslatedPaths(keys?: string | string[]): { params: Record<string, string> }[] {
+  return allLanguages.map((lang) => ({
+    params: getTranslatedPath(lang, keys)
+  }));
 }
 
 export function getRouteFromTranslatedPath(path: URL): string[] | null {
@@ -90,11 +74,11 @@ export function getRouteFromTranslatedPath(path: URL): string[] | null {
   return keys;
 }
 
-export function getOneLanguageVersionPerPost<T extends { id: string }>(posts: T[], lang: string): T[] {
+export function getPostsInRequiredLanguage<T extends { id: string }>(posts: T[], lang: string): T[] {
   const postsByTitle = new Map<string, T[]>();
 
   for (const post of posts) {
-    const [title, postLang] = post.id.split('/') as [string, Lang];
+    const title = post.id.split('/')[0];
     if (!postsByTitle.has(title)) {
       postsByTitle.set(title, []);
     }
@@ -104,12 +88,9 @@ export function getOneLanguageVersionPerPost<T extends { id: string }>(posts: T[
   const result: T[] = [];
 
   for (const [title, variants] of postsByTitle.entries()) {
-    let post = variants.find(p => p.id.endsWith(`/${lang}`));
+    const post = variants.find(p => p.id.endsWith(`/${lang}`));
     if (!post) {
-      post = variants.find(p => p.id.endsWith(`/${defaultLang}`));
-    }
-    if (!post) {
-      post = variants[0];
+      throw new Error(`Missing post in language "${lang}" for title "${title}"`);
     }
     result.push(post);
   }
@@ -117,6 +98,3 @@ export function getOneLanguageVersionPerPost<T extends { id: string }>(posts: T[
   return result;
 }
 
-export function extractPostTitleFromId(id: string): string {
-  return id.split('/')[0];
-}

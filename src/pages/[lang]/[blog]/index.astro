@@ -6,16 +6,16 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
-import { getTranslatedPaths, getOneLanguageVersionPerPost, extractPostTitleFromId, getTranslatedUrl } from '../../../i18n/utils';
+import { getAllTranslatedPaths, getPostsInRequiredLanguage, getTranslatedUrl } from '../../../i18n/utils';
 
 export function getStaticPaths() {
-	const params = getTranslatedPaths('blog')	
+	const params = getAllTranslatedPaths('blog')	
   	return params;
 } 
 
 const { lang, blog } = Astro.params;
 
-const posts = getOneLanguageVersionPerPost((await getCollection('blog')), lang).sort(
+const posts = getPostsInRequiredLanguage((await getCollection('blog')), lang).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
@@ -102,7 +102,7 @@ const posts = getOneLanguageVersionPerPost((await getCollection('blog')), lang).
 					{
 						posts.map((post) => (
 							<li>
-								<a href={getTranslatedUrl(lang, ['blog', extractPostTitleFromId(post.id)]) }>
+								<a href={getTranslatedUrl(lang, ['blog', post.id.split('/')[0]]) }>
 									{post.data.heroImage && (
 										<Image width={720} height={360} src={post.data.heroImage} alt="" />
 									)}

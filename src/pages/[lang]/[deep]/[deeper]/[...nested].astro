@@ -3,10 +3,10 @@ import Layout from '../../../../layouts/BlogPost.astro';
 import AboutHeroImage from '../../../../assets/blog-placeholder-about.jpg';
 import { AstroError } from 'astro/errors';
 import { getEntry, render } from 'astro:content';
-import { getTranslatedPaths } from '../../../../i18n/utils';
+import { getAllTranslatedPaths } from '../../../../i18n/utils';
 
 export function getStaticPaths() {
-	const params = getTranslatedPaths(['deep','deeper', 'nested'])	
+	const params = getAllTranslatedPaths(['deep','deeper', 'nested'])	
   	return params;
 }
 
