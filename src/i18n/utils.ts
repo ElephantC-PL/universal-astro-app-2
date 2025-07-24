@@ -55,7 +55,7 @@ export function getRouteFromTranslatedPath(path: URL): string[] | null {
   }
 
   const lang = possibleLang as Lang;
-  const segments = parts.slice(1);
+  const segments = parts.slice(1).map(segment => decodeURIComponent(segment));
 
   let current: Routes | undefined = routes;
   const keys: string[] = [];

@@ -1,8 +1,3 @@
-export const languages = {
-    pl: 'Polski',
-    en: 'English'  
-};
-
 export const ui = {
     pl: {
         'nav.home': 'Start',
@@ -16,5 +11,11 @@ export const ui = {
         'nav.blog': 'Blog',   
         'nav.nested': 'Nested'
     },
+    uk: {
+        'nav.home': 'Головна',
+        'nav.about': 'Про нас',  
+        'nav.blog': 'Блог',   
+        'nav.nested': 'Вкладене'
+    }
   
 } as const;

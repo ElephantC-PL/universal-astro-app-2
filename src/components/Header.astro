@@ -10,7 +10,7 @@ const currentRoute = getRouteFromTranslatedPath(Astro.url)
 const lang = Astro.currentLocale as Lang;
 
 if (!currentRoute) {
-  throw new AstroError(`No aboutUs content for lang=${currentRoute}`);
+  throw new AstroError(`No aboutUs content for lang=${lang} currentRoute=${currentRoute}`);
 }
 
 const t = useTranslations(lang);
@@ -21,6 +21,8 @@ const aboutLink = getTranslatedUrl(lang, 'aboutUs')
 const nestedLink = getTranslatedUrl(lang, ['deep','deeper', 'nested'])
 const switchPL = getTranslatedUrl('pl', currentRoute)
 const switchEn = getTranslatedUrl('en', currentRoute)
+const switchUk = getTranslatedUrl('uk', currentRoute)
+
 
 ---
 
@@ -43,6 +45,10 @@ const switchEn = getTranslatedUrl('en', currentRoute)
 				<span class="sr-only">Engish</span>
 				EN
 			</a>			
+			<a href={switchUk}>
+				<span class="sr-only">Ukrainian</span>
+				UK
+			</a>	
 		</div>
 	</nav>
 </header>
