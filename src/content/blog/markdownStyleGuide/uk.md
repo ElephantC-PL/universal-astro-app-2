@@ -2,6 +2,7 @@
 title: 'Посібник зі стилю Markdown'
 description: 'Ось зразок деякого базового синтаксису Markdown, який можна використовувати при написанні контенту Markdown в Astro.'
 pubDate: 'Jun 19 2024'
+heroImage: '../../../assets/blog-placeholder-1.jpg'
 ---
 
 Ось зразок деякого базового синтаксису Markdown, який можна використовувати при написанні контенту Markdown в Astro.

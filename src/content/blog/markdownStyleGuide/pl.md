@@ -1,14 +1,15 @@
 ---
-title: 'Stylowanie Markdown'
-description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
+title: 'Przewodnik po stylu Markdown'
+description: 'Oto przykład podstawowej składni Markdown, która może być używana podczas pisania treści Markdown w Astro.'
 pubDate: 'Jun 19 2024'
+heroImage: '../../../assets/blog-placeholder-1.jpg'
 ---
 
-Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
+Oto przykład podstawowej składni Markdown, która może być używana podczas pisania treści Markdown w Astro.
 
-## Headings
+## Nagłówki
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+Następujące elementy HTML `<h1>`—`<h6>` reprezentują sześć poziomów nagłówków sekcji. `<h1>` to najwyższy poziom sekcji, a `<h6>` najniższy.
 
 # H1
 
@@ -22,79 +23,79 @@ The following HTML `<h1>`—`<h6>` elements represent six levels of section head
 
 ###### H6
 
-## Paragraph
+## Akapit
 
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
 
-## Images
+## Obrazy
 
-### Syntax
+### Składnia
 
 ```markdown
-![Alt text](./full/or/relative/path/of/image)
+![Tekst alternatywny](./pełna/lub/względna/ścieżka/do/obrazu)
 ```
 
-### Output
+### Wynik
 
 ![blog placeholder](../../../assets/blog-placeholder-about.jpg)
 
-## Blockquotes
+## Cytaty
 
-The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a `footer` or `cite` element, and optionally with in-line changes such as annotations and abbreviations.
+Element blockquote reprezentuje treść cytowaną z innego źródła, opcjonalnie z przypisem, który musi znajdować się w elemencie `footer` lub `cite`, oraz opcjonalnie ze zmianami w linii, takimi jak adnotacje i skróty.
 
-### Blockquote without attribution
+### Cytat bez atrybucji
 
-#### Syntax
+#### Składnia
 
 ```markdown
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Note** that you can use _Markdown syntax_ within a blockquote.
+> **Uwaga** że możesz używać _składni Markdown_ wewnątrz cytatu.
 ```
 
-#### Output
+#### Wynik
 
 > Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
-> **Note** that you can use _Markdown syntax_ within a blockquote.
+> **Uwaga** że możesz używać _składni Markdown_ wewnątrz cytatu.
 
-### Blockquote with attribution
+### Cytat z atrybucją
 
-#### Syntax
+#### Składnia
 
 ```markdown
-> Don't communicate by sharing memory, share memory by communicating.<br>
+> Nie komunikuj się poprzez współdzielenie pamięci, współdziel pamięć poprzez komunikację.<br>
 > — <cite>Rob Pike[^1]</cite>
 ```
 
-#### Output
+#### Wynik
 
-> Don't communicate by sharing memory, share memory by communicating.<br>
+> Nie komunikuj się poprzez współdzielenie pamięci, współdziel pamięć poprzez komunikację.<br>
 > — <cite>Rob Pike[^1]</cite>
 
-[^1]: The above quote is excerpted from Rob Pike's [talk](https://www.youtube.com/watch?v=PAAkCSZUG1c) during Gopherfest, November 18, 2015.
+[^1]: Powyższy cytat pochodzi z [wystąpienia](https://www.youtube.com/watch?v=PAAkCSZUG1c) Roba Pike'a podczas Gopherfest, 18 listopada 2015.
 
-## Tables
+## Tabele
 
-### Syntax
+### Składnia
 
 ```markdown
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
+| Kursywa   | Pogrubienie | Kod   |
+| --------- | ----------- | ----- |
+| _kursywa_ | **pogrubienie** | `kod` |
 ```
 
-### Output
+### Wynik
 
-| Italics   | Bold     | Code   |
-| --------- | -------- | ------ |
-| _italics_ | **bold** | `code` |
+| Kursywa   | Pogrubienie | Kod   |
+| --------- | ----------- | ----- |
+| _kursywa_ | **pogrubienie** | `kod` |
 
-## Code Blocks
+## Bloki kodu
 
-### Syntax
+### Składnia
 
-we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntax, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
+możemy używać 3 ukośników wstecznych ``` w nowej linii i napisać fragment kodu, a następnie zamknąć 3 ukośnikami wstecznymi w nowej linii. Aby podświetlić składnię specyficzną dla języka, napisz jedno słowo nazwy języka po pierwszych 3 ukośnikach wstecznych, np. html, javascript, css, markdown, typescript, txt, bash
 
 ````markdown
 ```html
@@ -102,7 +103,7 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
+    <title>Przykład dokumentu HTML5</title>
   </head>
   <body>
     <p>Test</p>
@@ -111,14 +112,14 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 ```
 ````
 
-### Output
+### Wynik
 
 ```html
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Example HTML5 Document</title>
+    <title>Przykład dokumentu HTML5</title>
   </head>
   <body>
     <p>Test</p>
@@ -126,88 +127,88 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 </html>
 ```
 
-## List Types
+## Typy list
 
-### Ordered List
+### Lista uporządkowana
 
-#### Syntax
+#### Składnia
 
 ```markdown
-1. First item
-2. Second item
-3. Third item
+1. Pierwszy element
+2. Drugi element
+3. Trzeci element
 ```
 
-#### Output
+#### Wynik
 
-1. First item
-2. Second item
-3. Third item
+1. Pierwszy element
+2. Drugi element
+3. Trzeci element
 
-### Unordered List
+### Lista nieuporządkowana
 
-#### Syntax
+#### Składnia
 
 ```markdown
-- List item
-- Another item
-- And another item
+- Element listy
+- Inny element
+- I jeszcze jeden element
 ```
 
-#### Output
+#### Wynik
 
-- List item
-- Another item
-- And another item
+- Element listy
+- Inny element
+- I jeszcze jeden element
 
-### Nested list
+### Lista zagnieżdżona
 
-#### Syntax
+#### Składnia
 
 ```markdown
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
+- Owoce
+  - Jabłko
+  - Pomarańcza
+  - Banan
+- Nabiał
+  - Mleko
+  - Ser
 ```
 
-#### Output
+#### Wynik
 
-- Fruit
-  - Apple
-  - Orange
-  - Banana
-- Dairy
-  - Milk
-  - Cheese
+- Owoce
+  - Jabłko
+  - Pomarańcza
+  - Banan
+- Nabiał
+  - Mleko
+  - Ser
 
-## Other Elements — abbr, sub, sup, kbd, mark
+## Inne elementy — abbr, sub, sup, kbd, mark
 
-### Syntax
+### Składnia
 
 ```markdown
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+<abbr title="Graphics Interchange Format">GIF</abbr> to bitmapowy format obrazu.
 
 H<sub>2</sub>O
 
 X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+Naciśnij <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> aby zakończyć sesję.
 
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+Większość <mark>salamander</mark> prowadzi nocny tryb życia i poluje na owady, robaki i inne małe stworzenia.
 ```
 
-### Output
+### Wynik
 
-<abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
+<abbr title="Graphics Interchange Format">GIF</abbr> to bitmapowy format obrazu.
 
 H<sub>2</sub>O
 
 X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
 
-Press <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> to end the session.
+Naciśnij <kbd>CTRL</kbd> + <kbd>ALT</kbd> + <kbd>Delete</kbd> aby zakończyć sesję.
 
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
+Większość <mark>salamander</mark> prowadzi nocny tryb życia i poluje na owady, robaki i inne małe stworzenia.

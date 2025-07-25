@@ -1,6 +1,5 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts'; 
 import { useTranslations, getTranslatedUrl, getRouteFromTranslatedPath} from "../i18n/utils";
 import type { Lang } from '../i18n/languages';
 import { AstroError } from 'astro/errors';
@@ -28,7 +27,7 @@ const switchUk = getTranslatedUrl('uk', currentRoute)
 
 <header>
 	<nav>
-		<h2><a href={homeLink}>{SITE_TITLE}</a></h2>
+		<h2><a href={homeLink}>{t('name')}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
 			<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>
