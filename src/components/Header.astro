@@ -2,15 +2,10 @@
 import HeaderLink from './HeaderLink.astro';
 import { useTranslations, getTranslatedUrl, getRouteFromTranslatedPath} from "../i18n/utils";
 import type { Lang } from '../i18n/config';
-import { AstroError } from 'astro/errors';
 
-const currentRoute = getRouteFromTranslatedPath(Astro.url)
+const currentRoute = getRouteFromTranslatedPath(Astro.url) ?? [];
 
 const lang = Astro.currentLocale as Lang;
-
-if (!currentRoute) {
-  throw new AstroError(`No aboutUs content for lang=${lang} currentRoute=${currentRoute}`);
-}
 
 const t = useTranslations(lang);
 

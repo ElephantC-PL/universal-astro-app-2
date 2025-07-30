@@ -14,7 +14,7 @@ export function getStaticPaths() {
   	return params;
 } 
 
-const { lang, blog } = Astro.params;
+const lang = Astro.currentLocale as Lang;
 
 const t = useTranslations(lang as Lang);
 

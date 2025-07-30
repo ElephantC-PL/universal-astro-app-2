@@ -4,15 +4,16 @@ import AboutHeroImage from '../../assets/blog-placeholder-about.jpg';
 import { AstroError } from 'astro/errors';
 import { getEntry, render } from 'astro:content';
 import { getAllTranslatedPaths } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
 
 export function getStaticPaths() {
 	const params = getAllTranslatedPaths()	
   	return params;
 }
 
-const { lang} = Astro.params;
+const lang = Astro.currentLocale as Lang;
 
-const entry = await getEntry('home', lang);
+const entry = await getEntry('home', lang );
 
 if (!entry) {
   throw new AstroError(`No home content for lang=${lang}`);

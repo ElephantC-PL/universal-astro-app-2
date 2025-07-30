@@ -1,5 +1,5 @@
 import { ui } from './ui';
-import { DEFAULT_LOCALE, LOCALES } from './config';
+import { DEFAULT_LOCALE, LOCALES, PEFIX_DEFAULT_LOCALE } from './config';
 import type { Lang } from './config';
 import { routes } from './routes';
 import type { Routes, RouteNode } from './routes';
@@ -10,9 +10,11 @@ export function useTranslations(lang: keyof typeof ui) {
   }
 }
 
-export function getTranslatedPath(lang: string, keys?: string | string[]): Record<string, string> {
-if (!keys) {
-    return {lang: lang};
+export function getTranslatedPath(lang: string, keys?: string | string[]): Record<string, string | undefined> {
+  const effectiveLang = (PEFIX_DEFAULT_LOCALE === false && lang === DEFAULT_LOCALE) ? undefined : lang;
+
+  if (!keys) {
+    return { lang: effectiveLang };
   }
 
   const parts = Array.isArray(keys) ? keys : [keys];
@@ -29,18 +31,19 @@ if (!keys) {
   }
 
   return {
-    lang: lang,
+    lang: effectiveLang,
     ...Object.fromEntries(parts.map((key, index) => [key, pathParts[index]]))
-  }
+  };
 }
+
 
 
 export function getTranslatedUrl(lang: string, keys?: string | string[]): string {
   const params = getTranslatedPath(lang, keys);
-  return '/' + Object.values(params).join('/');
+  return ((PEFIX_DEFAULT_LOCALE || lang !== DEFAULT_LOCALE) ? '/' : '') + Object.values(params).join('/');
 }
 
-export function getAllTranslatedPaths(keys?: string | string[]): { params: Record<string, string> }[] {
+export function getAllTranslatedPaths(keys?: string | string[]): { params: Record<string, string|undefined> }[] {
   return LOCALES.map((lang) => ({
     params: getTranslatedPath(lang, keys)
   }));
