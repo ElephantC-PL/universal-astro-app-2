@@ -1,5 +1,5 @@
 import { ui } from './ui';
-import { DEFAULT_LOCALE, LOCALES, PEFIX_DEFAULT_LOCALE } from './config';
+import { DEFAULT_LOCALE, LOCALES, PREFIX_DEFAULT_LOCALE } from './config';
 import type { Lang } from './config';
 import { routes } from './routes';
 import type { Routes, RouteNode } from './routes';
@@ -11,7 +11,7 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function getTranslatedPath(lang: string, keys?: string | string[]): Record<string, string | undefined> {
-  const effectiveLang = (PEFIX_DEFAULT_LOCALE === false && lang === DEFAULT_LOCALE) ? undefined : lang;
+  const effectiveLang = (PREFIX_DEFAULT_LOCALE === false && lang === DEFAULT_LOCALE) ? undefined : lang;
 
   if (!keys) {
     return { lang: effectiveLang };
@@ -40,7 +40,8 @@ export function getTranslatedPath(lang: string, keys?: string | string[]): Recor
 
 export function getTranslatedUrl(lang: string, keys?: string | string[]): string {
   const params = getTranslatedPath(lang, keys);
-  return ((PEFIX_DEFAULT_LOCALE || lang !== DEFAULT_LOCALE) ? '/' : '') + Object.values(params).join('/');
+  const link = ((PREFIX_DEFAULT_LOCALE || lang !== DEFAULT_LOCALE) ? '/' : '') + Object.values(params).join('/');
+  return link.trim() === '' ? '/' : link;
 }
 
 export function getAllTranslatedPaths(keys?: string | string[]): { params: Record<string, string|undefined> }[] {
@@ -51,14 +52,22 @@ export function getAllTranslatedPaths(keys?: string | string[]): { params: Recor
 
 export function getRouteFromTranslatedPath(path: URL): string[] | null {
   const parts = path.pathname.replace(/^\/|\/$/g, '').split('/');
+  let lang: Lang;
+  let segments: string[];
+
   const possibleLang = parts[0];
 
-  if (!LOCALES.includes(possibleLang as Lang)) {
+  if (LOCALES.includes(possibleLang as Lang)) {
+    lang = possibleLang as Lang;
+    segments = parts.slice(1);
+  } else if (PREFIX_DEFAULT_LOCALE === false) {
+    lang = DEFAULT_LOCALE;
+    segments = parts;
+  } else {
     return null;
   }
 
-  const lang = possibleLang as Lang;
-  const segments = parts.slice(1).map(segment => decodeURIComponent(segment));
+  segments = segments.map(segment => decodeURIComponent(segment));
 
   let current: Routes | undefined = routes;
   const keys: string[] = [];
