@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
-import type { Lang } from '../../i18n/languages';
+import type { Lang } from '../../i18n/config';
 import { getAllTranslatedPaths, getPostsInRequiredLanguage, getTranslatedUrl, useTranslations } from '../../i18n/utils';
 
 

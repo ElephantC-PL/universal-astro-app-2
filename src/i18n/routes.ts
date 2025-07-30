@@ -1,4 +1,4 @@
-import type {Lang } from "./languages";
+import type {Lang } from "./config";
 
 export type RouteNode = {
   [lang in Lang]: string;

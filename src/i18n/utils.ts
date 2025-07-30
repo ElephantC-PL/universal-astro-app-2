@@ -1,12 +1,12 @@
 import { ui } from './ui';
-import { defaultLang, allLanguages } from './languages';
-import type { Lang } from './languages';
+import { DEFAULT_LOCALE, LOCALES } from './config';
+import type { Lang } from './config';
 import { routes } from './routes';
 import type { Routes, RouteNode } from './routes';
 
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof defaultLang]) {
-    return ui[lang][key] || ui[defaultLang][key];
+  return function t(key: keyof typeof ui[typeof DEFAULT_LOCALE]) {
+    return ui[lang][key] || ui[DEFAULT_LOCALE][key];
   }
 }
 
@@ -41,7 +41,7 @@ export function getTranslatedUrl(lang: string, keys?: string | string[]): string
 }
 
 export function getAllTranslatedPaths(keys?: string | string[]): { params: Record<string, string> }[] {
-  return allLanguages.map((lang) => ({
+  return LOCALES.map((lang) => ({
     params: getTranslatedPath(lang, keys)
   }));
 }
@@ -50,7 +50,7 @@ export function getRouteFromTranslatedPath(path: URL): string[] | null {
   const parts = path.pathname.replace(/^\/|\/$/g, '').split('/');
   const possibleLang = parts[0];
 
-  if (!allLanguages.includes(possibleLang as Lang)) {
+  if (!LOCALES.includes(possibleLang as Lang)) {
     return null;
   }
 

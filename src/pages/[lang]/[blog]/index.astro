@@ -7,7 +7,7 @@ import FormattedDate from '../../../components/FormattedDate.astro';
 import { Image } from 'astro:assets';
 import { getAllTranslatedPaths, getPostsInRequiredLanguage, getTranslatedUrl } from '../../../i18n/utils';
 import { useTranslations } from '../../../i18n/utils';
-import type { Lang } from '../../../i18n/languages';
+import type { Lang } from '../../../i18n/config';
 
 export function getStaticPaths() {
 	const params = getAllTranslatedPaths('blog')	

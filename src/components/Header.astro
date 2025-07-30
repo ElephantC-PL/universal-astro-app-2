@@ -1,7 +1,7 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { useTranslations, getTranslatedUrl, getRouteFromTranslatedPath} from "../i18n/utils";
-import type { Lang } from '../i18n/languages';
+import type { Lang } from '../i18n/config';
 import { AstroError } from 'astro/errors';
 
 const currentRoute = getRouteFromTranslatedPath(Astro.url)
