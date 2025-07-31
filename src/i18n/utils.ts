@@ -8,32 +8,50 @@ import type { Routes, RouteNode } from './routes';
 Description:
   React-like helper function (for Astro or similar environments).
   Returns a translation function `t(key)` for a specific language.
-  If translation for the chosen language is missing, the fallback value from DEFAULT_LOCALE is used.
+  If translation for the chosen language is missing, a fallback value from DEFAULT_LOCALE is used.
 
 Parameters:
-  lang: keyof typeof ui - selected language key (e.g. "pl", "en", "uk"), must match keys of `ui` object from i18n/ui.ts
+  lang: keyof typeof ui – selected language key (e.g. "pl", "en", "uk"), must match keys of the `ui` object from i18n/ui.ts
 
 Required Constants:
-  DEFAULT_LOCALE: keyof typeof ui - main language, used as fallback (e.g. "pl")
+  DEFAULT_LOCALE: keyof typeof ui – default language, used as fallback (e.g. "pl")
 
 Returns:
-  Function `t(key: keyof typeof ui[DEFAULT_LOCALE]) => string` that returns translated value for the given key.
+  Function `t(key: string) => string` – returns the translated string for the given dot-separated key (e.g. "nav.about").
+  Falls back to the value from the default locale if the translation is missing.
+
+Supports:
+  - Nested translation objects (e.g. { nav: { about: "..." } })
+  - Dot-notation access (e.g. "nav.about")
 
 Example:
   ui = {
-    pl: { hello: "Cześć", bye: "Pa" },
-    en: { hello: "Hi" }
+    pl: { nav: { about: "O nas" } },
+    en: { nav: { about: "About us" } }
   }
 
-  const t = useTranslations('en');
-  t('hello'); // "Hi"
-  t('bye');   // "Pa" – fallback from DEFAULT_LOCALE ('pl')
+  const t = useTranslations("en");
+  t("nav.about"); // "About us"
+  
 */
+
 export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: keyof typeof ui[typeof DEFAULT_LOCALE]) {
-    return ui[lang][key] || ui[DEFAULT_LOCALE][key];
+  return function t(key: string): string {
+    return (
+      getNestedValue(ui[lang], key) ??
+      getNestedValue(ui[DEFAULT_LOCALE], key) ??
+      key // fallback to key if not found
+    );
   }
 }
+function getNestedValue(obj: any, path: string): string | undefined {
+  return path.split('.').reduce((acc, key) => acc?.[key], obj);
+}
+
+
+
+
+
 
 /*
 Description:
