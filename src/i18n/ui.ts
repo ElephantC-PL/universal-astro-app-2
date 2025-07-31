@@ -1,3 +1,8 @@
+/*
+    Object with translations.
+    It shoud contain all texts from uniwersal components in all languages from config.ts/LOCALES.
+    It shoudn't contain translations of page content.
+*/
 export const ui = {
     pl: {
         'name': 'Astro Blog',

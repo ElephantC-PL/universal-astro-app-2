@@ -1,15 +1,15 @@
 import type {Lang } from "./config";
 
-export type RouteNode = {
-  [lang in Lang]: string;
-} & {
-  children?: Routes; 
-};
+/*
+  MAIN TRANSLATIONS OBJECT is in the bottom of this file
+*/
 
-export type Routes = {
-  [key: string]: RouteNode;
-};
+/*
+  PARTIAL TRANSLATIONS OBJECT
 
+  You can use this for children of main translations object.
+  Its separated for egsample for blog post itp.
+*/
 export const blogRoutes: Routes = {
   firstpost: {
     pl: 'pierwszy-wpis',
@@ -33,6 +33,13 @@ export const blogRoutes: Routes = {
   }
 };
 
+/*
+  MAIN TRANSLATIONS OBJECT
+
+  Main object with translations for urls.
+  Must contain all languages from config.ts/LOCALES
+  Structure correspond to url parts - children are parts after "/"
+*/
 export const routes: Routes = {
   aboutUs: {
     pl: 'o-nas',
@@ -65,5 +72,21 @@ export const routes: Routes = {
     }
   },
 };
+
+
+/*  
+  DO NOT CHANGE !!!! 
+  - its only types to make sure that structure of routes is correct  
+*/
+export type RouteNode = {
+  [lang in Lang]: string;
+} & {
+  children?: Routes; 
+};
+
+export type Routes = {
+  [key: string]: RouteNode;
+};
+
 
 

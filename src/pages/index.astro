@@ -4,7 +4,7 @@ import AboutHeroImage from '../assets/blog-placeholder-about.jpg';
 import { AstroError } from 'astro/errors';
 import { getEntry, render } from 'astro:content';
 import { getAllTranslatedPaths } from '../i18n/utils';
-import { PREFIX_DEFAULT_LOCALE, type Lang } from '../i18n/config';
+import {type Lang } from '../i18n/config';
 
 export function getStaticPaths() {
 	let params = getAllTranslatedPaths()
