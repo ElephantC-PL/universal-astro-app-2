@@ -30,6 +30,7 @@ Inside of your Astro project, you'll see the following folders and files:
 ├── src/
 │   ├── components/
 │   ├── content/
+│   ├── i18n/
 │   ├── layouts/
 │   └── pages/
 ├── astro.config.mjs
@@ -66,3 +67,158 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 ## Credit
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+
+## 🌍 Multi-language i18n
+
+All translation-related features are located in the folder: `src/i18n`
+
+1. `./config.ts` – Define all the languages your application should support here. Remember that the same settings must also be applied in `astro.config.ts`.
+2. `./routes.ts` – This file contains translations for all URLs.
+3. `./ui.ts` – Here you define translations for all content used in reusable components and any content that is not part of individual pages.
+4. `./utils.ts` – Contains all utility functions used for handling translations.
+
+### Translations for global content and reusable components
+
+To use a translation in a component – define the language:
+
+```ts
+const lang = Astro.currentLocale as Lang;
+const t = useTranslations(lang);
+```
+
+Usage in HTML (.astro):
+
+```html
+<p>{t('nav.home')}</p> 
+```
+
+Use keys from the file: `./i18n/ui.ts`
+
+### Translations for page content
+
+In `src/pages/[...lang]`, use files like `[aboutUs].astro`.  
+You can also nest them for deeper URLs:  
+`src/pages/[...lang]/[deep]/[deeper]/[nested].astro`
+
+#### Translating URLs:
+
+```ts
+export function getStaticPaths() {
+	const params = getAllTranslatedPaths('aboutUs') 
+  	return params;
+}
+```
+
+In this function, use keys from `./i18n/routes.ts`.  
+It can be a `string` or a `string[]` for nested pages.  
+For nested pages, use the following in `getStaticPaths()`:
+
+```ts
+const params = getAllTranslatedPaths(['deep','deeper', 'nested'])
+```
+
+#### Translating content:
+
+Translations are stored in collections in the `src/content` folder.  
+The collection structure must look like this:
+
+```
+├── content/
+│   ├── aboutUs/
+│   │   ├── en.md
+│   │   ├── pl.md
+│   │   ├── uk.md
+```
+
+And in `content.config.ts`, for example:
+
+```ts
+const aboutUs = defineCollection({	
+	loader: glob({ base: './src/content/aboutUs', pattern: '**/*.{md,mdx}' }),	
+	schema: () => z.object({
+		title: z.string(),
+        ...,
+	}),
+});
+```
+
+### Translating blog article content
+
+#### Blog collection structure:
+
+```
+├── content/
+│   ├── blog/
+│   │   ├── redCats
+│   │   │   ├── en.md
+│   │   │   ├── pl.md
+│   │   │   ├── uk.md
+│   │   ├── redDogs
+│   │   │   ├── en.md
+│   │   │   ├── pl.md
+│   │   │   ├── uk.md
+```
+
+In `content.config.ts`, for example:
+
+```ts
+const blog = defineCollection({	
+	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),	
+	schema: ({ image }) => z.object({
+		title: z.string(),
+		...,
+	}),
+});
+```
+
+#### Translating URLs:
+
+In the `pages` directory, use slugs, for example:  
+`src/pages/[...lang]/[blog]/[slug].astro`
+
+Define paths for all languages based on the collection:
+
+```ts
+export async function getStaticPaths() {	
+	const posts = await getCollection('blog');	
+	return posts.map((post: CollectionEntry<'blog'>) => {
+		const postId = post.id.split('/')[0];  // post.id is e.g. redCat/en
+		const lang = post.id.split('/')[1];	
+		const { [postId]: translatedPostName, ...rest } = getTranslatedPath(lang, ['blog', postId])
+		return {
+			params:  { ...rest, slug: translatedPostName },
+			props: post,
+		};
+	});
+}
+```
+
+#### Rendering translated blog post content:
+
+Thanks to passing the article content as `props` for each URL, it's easy to render:
+
+```ts 
+const post = Astro.props;
+const { Content } = await render(post);
+
+---
+<BlogPost {...post.data}>
+	<Content />
+</BlogPost>
+```
+
+### Setting the default language prefix in the URL
+
+If the default language is `en`, by default it does **not** appear in the URL:
+```
+(domain)/about-us/
+(domain)/pl/o-nas
+```
+
+To change this behavior, set `prefixDefaultLocale` in both configuration files:
+- `src/i18n/config.ts`
+- `astro.config.mjs`
+
+**IMPORTANT!!!**  
+If `prefixDefaultLocale = true`, you must create the file `pages/index.astro` – although its content will never be rendered.  
+However, when `prefixDefaultLocale = false`, it’s a good idea to delete this file so that the homepage is loaded from `pages/[...lang]/index.astro`.
