@@ -222,3 +222,26 @@ To change this behavior, set `prefixDefaultLocale` in both configuration files:
 **IMPORTANT!!!**  
 If `prefixDefaultLocale = true`, you must create the file `pages/index.astro` – although its content will never be rendered.  
 However, when `prefixDefaultLocale = false`, it’s a good idea to delete this file so that the homepage is loaded from `pages/[...lang]/index.astro`.
+
+### Displaying a list of articles in a single language ###
+
+To extract a list of posts filtered by a specific language:
+
+```ts
+const lang = Astro.currentLocale as Lang;
+const posts = getPostsInRequiredLanguage((await getCollection('blog')), lang).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+```
+
+Then, render the list using appropriate language-specific links:
+
+```ts (.astro)
+{
+	posts.map((post) => (		
+		<a href={getTranslatedUrl(lang, ['blog', post.id.split('/')[0]]) }>		
+			<h4 class="title">{post.data.title}</h4>		
+		</a>		
+	))
+}
+```
