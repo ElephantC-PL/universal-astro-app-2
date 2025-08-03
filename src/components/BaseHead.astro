@@ -2,9 +2,10 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
-import { SITE_TITLE } from '../consts';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import type { ImageMetadata } from 'astro';
+import type { Lang } from '../i18n/config';
+import { useTranslations } from '../i18n/utils';
 
 interface Props {
 	title: string;
@@ -15,6 +16,9 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+const lang = Astro.currentLocale as Lang;
+const t = useTranslations(lang);
 ---
 
 <!-- Global Metadata -->
@@ -25,7 +29,7 @@ const { title, description, image = FallbackImage } = Astro.props;
 <link
 	rel="alternate"
 	type="application/rss+xml"
-	title={SITE_TITLE}
+	title={t('name')}
 	href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
@@ -38,9 +42,9 @@ const { title, description, image = FallbackImage } = Astro.props;
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
-<meta name="description" content={description} />
+<title>{t('name')}</title>
+<meta name={t('name')} content={title} />
+<meta name={t('meta.description')} content={description} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />

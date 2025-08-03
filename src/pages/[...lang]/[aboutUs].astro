@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+import AboutHeroImage from '../../assets/blog-placeholder-about.jpg';
+import { AstroError } from 'astro/errors';
+import { getEntry, render } from 'astro:content';
+import { getAllTranslatedPaths } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+export function getStaticPaths() {
+	const params = getAllTranslatedPaths('aboutUs')	
+  	return params;
+}
+
+const { aboutUs } = Astro.params;
+const lang = Astro.currentLocale as Lang;
+
+const entry = await getEntry('aboutUs', lang);
+
+if (!entry) {
+  throw new AstroError(`No aboutUs content for lang=${lang}`);
+}
+
+const { Content } = await render(entry);
+---
+<Layout
+	title={entry.data.title}
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}
+	heroImage={AboutHeroImage}
+>
+	<p>
+		Lang: {lang} <br />
+		AboutUs: {aboutUs}		
+	</p>	
+	<Content />
+</Layout>
