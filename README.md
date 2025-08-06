@@ -245,3 +245,8 @@ Then, render the list using appropriate language-specific links:
 	))
 }
 ```
+
+## Deployment:
+
+**IMPORTANT!!!**  
+Remember to set the correct domain in the sitemap path in the `public/robots.txt` file.
