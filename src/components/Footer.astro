@@ -9,7 +9,7 @@ const t = useTranslations(lang);
 ---
 
 <footer>
-	&copy; {today.getFullYear()} {t('footer.copyright')}.
+	&copy; {today.getFullYear()} {t('footer.copyright')}
 	<div class="social-links">
 		<a href="https://m.webtoo.ls/@astro" target="_blank">
 			<span class="sr-only">Follow Astro on Mastodon</span>
@@ -44,6 +44,13 @@ const t = useTranslations(lang);
 			>
 		</a>
 	</div>
+	<div class="footer-links">
+		<a href="/polityka-prywatnosci">{t('footer.privacyPolicy')}</a>
+		<span>|</span>
+		<a href="/ciasteczka">{t('footer.cookies')}</a>
+		<span>|</span>
+		<a href="/regulamin">{t('footer.regimen')}</a>
+	</div>
 </footer>
 <style>
 	footer {
@@ -64,5 +71,22 @@ const t = useTranslations(lang);
 	}
 	.social-links a:hover {
 		color: rgb(var(--gray-dark));
+	}
+		.footer-links {
+		margin-top: 1em;
+		display: flex;
+		justify-content: center;
+		gap: 0.5em;
+		font-size: 0.9em;
+	}
+	.footer-links a {
+		text-decoration: none;
+		color: rgb(var(--gray));
+	}
+	.footer-links a:hover {
+		color: rgb(var(--gray-dark));
+	}
+	.footer-links span {
+		color: rgb(var(--gray));
 	}
 </style>
