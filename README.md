@@ -249,4 +249,6 @@ Then, render the list using appropriate language-specific links:
 ## Deployment:
 
 **IMPORTANT!!!**  
-Remember to set the correct domain in the sitemap path in the `public/robots.txt` file.
+Remember to set the correct:
+1. Domain in the **sitemap** path in the `public/robots.txt` file.
+2. Information in **manifest**.
