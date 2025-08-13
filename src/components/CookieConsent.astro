@@ -1,0 +1,14 @@
+---
+import "../scripts/cookies.ts";
+---
+
+<div id="cookie-popup" style="display:none;position:fixed;bottom:20px;left:20px;padding:10px;background:white;border:1px solid #ccc;">
+  <p>Używamy ciasteczek, aby poprawić jakość korzystania z naszej strony.</p>
+  <button id="cookie-accept">Akceptuj</button>
+  <button id="cookie-reject">Odrzuć</button>
+</div>
+
+<script>
+  import { initCookiePopup } from "../scripts/cookies.ts";
+  initCookiePopup("cookie-popup", "cookie-accept", "cookie-reject");
+</script>

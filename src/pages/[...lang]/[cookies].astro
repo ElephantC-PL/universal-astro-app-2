@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+import { AstroError } from 'astro/errors';
+import { getEntry, render } from 'astro:content';
+import { getAllTranslatedPaths } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+export function getStaticPaths() {
+	const params = getAllTranslatedPaths('cookies')	
+  	return params;
+}
+
+const { cookies } = Astro.params;
+const lang = Astro.currentLocale as Lang;
+
+---
+<Layout
+	title="Cookies"
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}	
+>		
+    <p id="cookie-status"></p>
+    <button id="settings-accept">Akceptuj</button>
+    <button id="settings-reject">Odrzuć</button>
+
+    <script>
+        import { initCookieSettings } from "../../scripts/cookies";       
+        initCookieSettings("settings-accept", "settings-reject", "cookie-status");
+    </script>
+</Layout>
