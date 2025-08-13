@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+import { AstroError } from 'astro/errors';
+import { getEntry, render } from 'astro:content';
+import { getAllTranslatedPaths } from '../../i18n/utils';
+import type { Lang } from '../../i18n/config';
+
+export function getStaticPaths() {
+	const params = getAllTranslatedPaths('privacyPolicy')	
+  	return params;
+}
+
+const { privacyPolicy } = Astro.params;
+const lang = Astro.currentLocale as Lang;
+
+const entry = await getEntry('privacyPolicy', lang);
+
+if (!entry) {
+  throw new AstroError(`No privacyPolicy content for lang=${lang}`);
+}
+
+const { Content } = await render(entry);
+---
+<Layout
+	title={entry.data.title}
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}	
+>	
+	<Content />
+</Layout>

@@ -30,6 +30,24 @@ const aboutUs = defineCollection({
 	}),
 });
 
+const termsOfService = defineCollection({
+	// Load Markdown and MDX files in the `src/content/termsOfService/` directory.
+	loader: glob({ base: './src/content/termsOfService', pattern: '**/*.{md,mdx}' }),
+	// Type-check frontmatter using a schema	
+	schema: () => z.object({
+		title: z.string(),			
+	}),
+});
+
+const privacyPolicy = defineCollection({
+	// Load Markdown and MDX files in the `src/content/privacyPolicy/` directory.
+	loader: glob({ base: './src/content/privacyPolicy', pattern: '**/*.{md,mdx}' }),
+	// Type-check frontmatter using a schema	
+	schema: () => z.object({
+		title: z.string(),			
+	}),
+});
+
 const nested = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
 	loader: glob({ base: './src/content/nested', pattern: '**/*.{md,mdx}' }),
@@ -39,4 +57,4 @@ const nested = defineCollection({
 	}),
 });
 
-export const collections = { blog, home, aboutUs, nested };
+export const collections = { blog, home, aboutUs, termsOfService, privacyPolicy, nested };

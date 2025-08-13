@@ -16,7 +16,7 @@ export const ui = {
       copyright: 'Twoje imię tutaj. Wszelkie prawa zastrzeżone.',
       privacyPolicy: 'Polityka prywatności',
       cookies: 'Ciasteczka',
-      regimen: 'Regulamin'
+      termsOfService: 'Regulamin'
     },
     meta: {
       description: 'Witaj na mojej stronie!',
@@ -34,7 +34,7 @@ export const ui = {
       copyright: 'Your name here. All rights reserved.',
       privacyPolicy: 'Privacy policy',
       cookies: 'Cookies',
-      regimen: 'Regimen'
+      termsOfService: 'Terms of Service'
     },
     meta: {
       description: 'Welcome to my website!',
@@ -52,7 +52,7 @@ export const ui = {
       copyright: 'Ваше імʼя тут. Всі права захищені.',
       privacyPolicy: 'Політика конфіденційності',
       cookies: 'файли',
-      regiment: 'Режим'
+      termsOfService: 'Умови використання'
     },
     meta: {
       description: 'Ласкаво просимо на мій веб-сайт!',

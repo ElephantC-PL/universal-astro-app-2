@@ -62,10 +62,10 @@ export const routes: Routes = {
     en: 'cookies',
     uk: 'файли'
   },
-  regimen: {
+  termsOfService: {
     pl: 'regulamin',
-    en: 'regimen',
-    uk: 'статут' 
+    en: 'termsOfService',
+    uk: 'умовиВикористання' 
   },
   deep: {
     pl: 'gleboko',
