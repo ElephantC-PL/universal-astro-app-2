@@ -1,6 +1,6 @@
 ---
 import type { Lang } from "../i18n/config";
-import { useTranslations } from "../i18n/utils";
+import { getTranslatedUrl, useTranslations } from "../i18n/utils";
 
 const lang = Astro.currentLocale as Lang;
 
@@ -45,11 +45,11 @@ const t = useTranslations(lang);
 		</a>
 	</div>
 	<div class="footer-links">
-		<a href="/polityka-prywatnosci">{t('footer.privacyPolicy')}</a>
+		<a href={getTranslatedUrl(lang, 'privacyPolicy')}>{t('footer.privacyPolicy')}</a>
 		<span>|</span>
-		<a href="/ciasteczka">{t('footer.cookies')}</a>
+		<a href={getTranslatedUrl(lang, 'cookies')}>{t('footer.cookies')}</a>
 		<span>|</span>
-		<a href="/regulamin">{t('footer.regimen')}</a>
+		<a href={getTranslatedUrl(lang, 'regimen')}>{t('footer.regimen')}</a>
 	</div>
 </footer>
 <style>

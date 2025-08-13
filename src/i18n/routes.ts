@@ -52,6 +52,21 @@ export const routes: Routes = {
     uk: 'блог',
     children: blogRoutes
   },
+  privacyPolicy: {
+    pl: 'polityka-prywatnosci',
+    en: 'privacy-policy',
+    uk: 'політика-конфіденційності'
+  }, 
+  cookies: {
+    pl: 'ciasteczka',
+    en: 'cookies',
+    uk: 'файли'
+  },
+  regimen: {
+    pl: 'regulamin',
+    en: 'regimen',
+    uk: 'статут' 
+  },
   deep: {
     pl: 'gleboko',
     en: 'deep',
