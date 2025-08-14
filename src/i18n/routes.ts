@@ -60,7 +60,7 @@ export const routes: Routes = {
   cookies: {
     pl: 'ciasteczka',
     en: 'cookies',
-    uk: 'файли'
+    uk: 'українська'
   },
   termsOfService: {
     pl: 'regulamin',

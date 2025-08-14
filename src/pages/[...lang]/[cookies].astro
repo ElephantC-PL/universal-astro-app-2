@@ -2,7 +2,7 @@
 import Layout from '../../layouts/BlogPost.astro';
 import { AstroError } from 'astro/errors';
 import { getEntry, render } from 'astro:content';
-import { getAllTranslatedPaths } from '../../i18n/utils';
+import { getAllTranslatedPaths, useTranslations } from '../../i18n/utils';
 import type { Lang } from '../../i18n/config';
 
 export function getStaticPaths() {
@@ -10,21 +10,30 @@ export function getStaticPaths() {
   	return params;
 }
 
-const { cookies } = Astro.params;
 const lang = Astro.currentLocale as Lang;
+const entry = await getEntry('cookiesPage', lang);
+const t = useTranslations(lang);
 
+if (!entry) {
+  throw new AstroError(`No cookiesPage content for lang=${lang}`);
+}
+
+const { Content } = await render(entry);
 ---
 <Layout
-	title="Cookies"
+	title={entry.data.title}
 	description="Lorem ipsum dolor sit amet"
 	pubDate={new Date('August 08 2021')}	
 >		
-    <p id="cookie-status"></p>
-    <button id="settings-accept">Akceptuj</button>
-    <button id="settings-reject">Odrzuć</button>
+    <Content />
+    <p id="status-unknown" style="display:none;"> {t('cookiesStatus.unknown')} </p>
+    <p id="status-accepted" style="display:none;"> {t('cookiesStatus.accepted')} </p>
+    <p id="status-rejected" style="display:none;"> {t('cookiesStatus.rejected')} </p>  
+    <button id="settings-accept">{t('buttons.accept')}</button>
+    <button id="settings-reject">{t('buttons.reject')}</button>
 
     <script>
         import { initCookieSettings } from "../../scripts/cookies";       
-        initCookieSettings("settings-accept", "settings-reject", "cookie-status");
+        initCookieSettings("settings-accept", "settings-reject", "status-unknown", 'status-accepted', 'status-rejected');
     </script>
 </Layout>

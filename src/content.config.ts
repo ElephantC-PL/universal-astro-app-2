@@ -48,6 +48,23 @@ const privacyPolicy = defineCollection({
 	}),
 });
 
+const cookiesPopup = defineCollection({
+	// Load Markdown and MDX files in the `src/content/privacyPolicy/` directory.
+	loader: glob({ base: './src/content/cookiesPopup', pattern: '**/*.{md,mdx}' }),
+	// Type-check frontmatter using a schema	
+	schema: () => z.object({
+	}),
+});
+
+const cookiesPage = defineCollection({
+	// Load Markdown and MDX files in the `src/content/privacyPolicy/` directory.
+	loader: glob({ base: './src/content/cookiesPage', pattern: '**/*.{md,mdx}' }),
+	// Type-check frontmatter using a schema	
+	schema: () => z.object({
+		title: z.string(),	
+	}),
+});
+
 const nested = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
 	loader: glob({ base: './src/content/nested', pattern: '**/*.{md,mdx}' }),
@@ -57,4 +74,4 @@ const nested = defineCollection({
 	}),
 });
 
-export const collections = { blog, home, aboutUs, termsOfService, privacyPolicy, nested };
+export const collections = { blog, home, aboutUs, termsOfService, privacyPolicy, cookiesPage, cookiesPopup, nested };

@@ -1,11 +1,26 @@
 ---
+import { getEntry, render } from "astro:content";
+import type { Lang } from "../i18n/config";
+import { useTranslations } from "../i18n/utils";
 import "../scripts/cookies.ts";
+import { AstroError } from "astro/errors";
+
+const lang = Astro.currentLocale as Lang;
+
+const t = useTranslations(lang);
+const entry = await getEntry('cookiesPopup', lang);
+
+if (!entry) {
+  throw new AstroError(`No cookiesPopup content for lang=${lang}`);
+}
+
+const { Content } = await render(entry);
 ---
 
 <div id="cookie-popup" style="display:none;position:fixed;bottom:20px;left:20px;padding:10px;background:white;border:1px solid #ccc;">
-  <p>Używamy ciasteczek, aby poprawić jakość korzystania z naszej strony.</p>
-  <button id="cookie-accept">Akceptuj</button>
-  <button id="cookie-reject">Odrzuć</button>
+  <Content/>
+  <button id="cookie-accept"> {t('buttons.accept')} </button>
+  <button id="cookie-reject"> {t('buttons.reject')} </button>
 </div>
 
 <script>

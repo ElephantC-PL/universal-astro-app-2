@@ -21,6 +21,15 @@ export const ui = {
     meta: {
       description: 'Witaj na mojej stronie!',
     },
+    buttons: {
+      accept: 'Akceptuj',
+      reject: 'Odrzuć'
+    },
+    cookiesStatus: {
+      unknown: 'Brak ustawień (użytkownik nie wybrał)',
+      accepted: 'Ciasteczka zaakceptowane',
+      rejected: 'Ciasteczka odrzucone'
+    }
   },
   en: {
     name: 'Astro Blog',
@@ -39,6 +48,15 @@ export const ui = {
     meta: {
       description: 'Welcome to my website!',
     },
+    buttons: {
+      accept: 'Accept',
+      reject: 'Reject'
+    },
+    cookiesStatus: {
+      unknown: 'No settings (user has not chosen)',
+      accepted: 'Cookies accepted',
+      rejected: 'Cookies rejected'
+    }
   },
   uk: {
     name: 'Астро Блог',
@@ -51,11 +69,20 @@ export const ui = {
     footer: {
       copyright: 'Ваше імʼя тут. Всі права захищені.',
       privacyPolicy: 'Політика конфіденційності',
-      cookies: 'файли',
+      cookies: 'Українська',
       termsOfService: 'Умови використання'
     },
     meta: {
       description: 'Ласкаво просимо на мій веб-сайт!',
     },
+    buttons: {
+      accept: 'Прийняти',
+      reject: 'Відхилити'
+    },
+    cookiesStatus: {
+      unknown: 'Немає налаштувань (користувач не вибрав)',
+      accepted: 'Українська прийняті',
+      rejected: 'Українська відхилені'
+    }
   }
 } as const;

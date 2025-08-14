@@ -16,11 +16,13 @@ export function getCookie(name: string): string | null {
 }
 
 export function initCookiePopup(popupId: string, acceptId: string, rejectId: string): void {
+  console.log('a')
   const popup = document.getElementById(popupId) as HTMLDivElement | null;
   const acceptBtn = document.getElementById(acceptId) as HTMLButtonElement | null;
   const rejectBtn = document.getElementById(rejectId) as HTMLButtonElement | null;
 
   if (!popup || !acceptBtn || !rejectBtn) return;
+  console.log('b')
 
   const consent = getCookie('cookieConsent') as CookieConsentValue;
   if (consent) {
@@ -41,21 +43,35 @@ export function initCookiePopup(popupId: string, acceptId: string, rejectId: str
   });
 }
 
-export function initCookieSettings(acceptId: string, rejectId: string, statusId: string): void {
+export function initCookieSettings(
+  acceptId: string,
+  rejectId: string,
+  unknownId: string,
+  acceptedId: string,
+  rejectedId: string
+): void {
   const acceptBtn = document.getElementById(acceptId) as HTMLButtonElement | null;
   const rejectBtn = document.getElementById(rejectId) as HTMLButtonElement | null;
-  const statusEl = document.getElementById(statusId) as HTMLParagraphElement | null;
+  const unknownEl = document.getElementById(unknownId) as HTMLParagraphElement | null;
+  const acceptedEl = document.getElementById(acceptedId) as HTMLParagraphElement | null;
+  const rejectedEl = document.getElementById(rejectedId) as HTMLParagraphElement | null;
 
-  if (!acceptBtn || !rejectBtn || !statusEl) return;
+  if (!acceptBtn || !rejectBtn || !unknownEl || !acceptedEl || !rejectedEl) return;
+
+  const showStatus = (status: 'unknown' | 'accepted' | 'rejected') => {
+    unknownEl.style.display = status === 'unknown' ? 'block' : 'none';
+    acceptedEl.style.display = status === 'accepted' ? 'block' : 'none';
+    rejectedEl.style.display = status === 'rejected' ? 'block' : 'none';
+  };
 
   const updateStatus = () => {
     const consent = getCookie('cookieConsent') as CookieConsentValue;
     if (!consent) {
-      statusEl.textContent = 'Brak ustawień (użytkownik nie wybrał)';
+      showStatus('unknown');
     } else if (consent === 'accepted') {
-      statusEl.textContent = 'Ciasteczka zaakceptowane';
+      showStatus('accepted');
     } else {
-      statusEl.textContent = 'Ciasteczka odrzucone';
+      showStatus('rejected');
     }
   };
 
