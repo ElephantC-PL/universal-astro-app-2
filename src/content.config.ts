@@ -14,7 +14,7 @@ const blog = defineCollection({
 
 const home = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/home', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/page/home', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema
 	schema: () => z.object({
 		title: z.string(),			
@@ -23,7 +23,7 @@ const home = defineCollection({
 
 const aboutUs = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/aboutUs', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/page/aboutUs', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
 		title: z.string(),			
@@ -32,7 +32,7 @@ const aboutUs = defineCollection({
 
 const termsOfService = defineCollection({
 	// Load Markdown and MDX files in the `src/content/termsOfService/` directory.
-	loader: glob({ base: './src/content/termsOfService', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/page/termsOfService', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
 		title: z.string(),			
@@ -41,7 +41,7 @@ const termsOfService = defineCollection({
 
 const privacyPolicy = defineCollection({
 	// Load Markdown and MDX files in the `src/content/privacyPolicy/` directory.
-	loader: glob({ base: './src/content/privacyPolicy', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/page/privacyPolicy', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
 		title: z.string(),			
@@ -50,7 +50,7 @@ const privacyPolicy = defineCollection({
 
 const cookiesPopup = defineCollection({
 	// Load Markdown and MDX files in the `src/content/privacyPolicy/` directory.
-	loader: glob({ base: './src/content/cookiesPopup', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/popup/cookies', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
 	}),
@@ -58,7 +58,7 @@ const cookiesPopup = defineCollection({
 
 const cookiesPage = defineCollection({
 	// Load Markdown and MDX files in the `src/content/privacyPolicy/` directory.
-	loader: glob({ base: './src/content/cookiesPage', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/page/cookies', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
 		title: z.string(),	
@@ -67,7 +67,7 @@ const cookiesPage = defineCollection({
 
 const nested = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/nested', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content/page/nested', pattern: '**/*.{md,mdx}' }),
 	// Type-check frontmatter using a schema	
 	schema: () => z.object({
 		title: z.string(),			
