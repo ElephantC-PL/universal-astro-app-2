@@ -16,13 +16,12 @@ export function getCookie(name: string): string | null {
 }
 
 export function initCookiePopup(popupId: string, acceptId: string, rejectId: string): void {
-  console.log('a')
   const popup = document.getElementById(popupId) as HTMLDivElement | null;
   const acceptBtn = document.getElementById(acceptId) as HTMLButtonElement | null;
   const rejectBtn = document.getElementById(rejectId) as HTMLButtonElement | null;
 
   if (!popup || !acceptBtn || !rejectBtn) return;
-  console.log('b')
+  
 
   const consent = getCookie('cookieConsent') as CookieConsentValue;
   if (consent) {
