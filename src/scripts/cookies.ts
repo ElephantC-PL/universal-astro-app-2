@@ -47,13 +47,15 @@ export function initCookieSettings(
   rejectId: string,
   unknownId: string,
   acceptedId: string,
-  rejectedId: string
+  rejectedId: string,
+  popupId: string = "cookie-popup" // 👈 opcjonalny ID popupu
 ): void {
   const acceptBtn = document.getElementById(acceptId) as HTMLButtonElement | null;
   const rejectBtn = document.getElementById(rejectId) as HTMLButtonElement | null;
   const unknownEl = document.getElementById(unknownId) as HTMLParagraphElement | null;
   const acceptedEl = document.getElementById(acceptedId) as HTMLParagraphElement | null;
   const rejectedEl = document.getElementById(rejectedId) as HTMLParagraphElement | null;
+  const popup = document.getElementById(popupId) as HTMLDivElement | null;
 
   if (!acceptBtn || !rejectBtn || !unknownEl || !acceptedEl || !rejectedEl) return;
 
@@ -79,10 +81,12 @@ export function initCookieSettings(
   acceptBtn.addEventListener('click', () => {
     setCookie('cookieConsent', 'accepted', 365);
     updateStatus();
+    if (popup) popup.style.display = 'none'; // 👈 schowaj popup
   });
 
   rejectBtn.addEventListener('click', () => {
     setCookie('cookieConsent', 'rejected', 365);
     updateStatus();
+    if (popup) popup.style.display = 'none'; // 👈 schowaj popup
   });
 }
