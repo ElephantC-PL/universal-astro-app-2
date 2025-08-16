@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/BlogPost.astro';
+import Layout from '../../layouts/Static.astro';
 import AboutHeroImage from '../../assets/blog-placeholder-about.jpg';
 import { AstroError } from 'astro/errors';
 import { getEntry, render } from 'astro:content';
@@ -24,8 +24,7 @@ const { Content } = await render(entry);
 ---
 <Layout
 	title={entry.data.title}
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
+	description="Lorem ipsum dolor sit amet"	
 	heroImage={AboutHeroImage}
 >
 	<p>

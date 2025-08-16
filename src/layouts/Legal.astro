@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from './Base.astro';
+
+interface Props {
+    title?: string;
+    description?: string;  
+}
+
+const { title, description } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+	<style>			
+		.prose {
+			width: 720px;
+			max-width: calc(100% - 2em);
+			margin: auto;
+			padding: 1em;
+			color: rgb(var(--gray-dark));
+            font-family: 'Times New Roman', Times, serif;
+		}
+		.title {
+			margin-bottom: 1em;
+			padding: 1em 0;
+			text-align: center;
+			line-height: 1;
+		}
+		.title h1 {
+			margin: 0 0 0.5em 0;
+		}	
+	</style>
+	<article>	
+		<div class="prose">
+			<div class="title">				
+				<h1>{title}</h1>
+				<hr />
+			</div>
+			<slot />
+		</div>
+	</article>	
+</BaseLayout>
