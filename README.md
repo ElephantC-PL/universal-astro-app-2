@@ -252,3 +252,4 @@ Then, render the list using appropriate language-specific links:
 Remember to set the correct:
 1. Domain in the **sitemap** path in the `public/robots.txt` file.
 2. Information in **manifest**.
+3. Information in pages: **privacy policy**, **terms of service**, **cookies** and **cookies popup**.

@@ -1,0 +1,25 @@
+---
+import { getEntry, render } from 'astro:content';
+import Layout from '../layouts/BlogPost.astro';
+import { AstroError } from 'astro/errors';
+import type { Lang } from '../i18n/config';
+
+const lang = Astro.currentLocale as Lang;
+
+const entry = await getEntry('error404', lang);
+
+if (!entry) {
+  throw new AstroError(`No error404 content for lang=${lang}`);
+}
+
+const { Content } = await render(entry);
+---
+
+<Layout
+	title={entry.data.title}
+	description="Lorem ipsum dolor sit amet"
+	pubDate={new Date('August 08 2021')}	
+>
+<Content/>
+	
+</Layout>

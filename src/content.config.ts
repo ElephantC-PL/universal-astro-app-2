@@ -46,6 +46,13 @@ const cookiesPopup = defineCollection({
 	}),
 });
 
+const error404 = defineCollection({	
+	loader: glob({ base: './src/content/page/error404', pattern: '**/*.{md,mdx}' }),	
+	schema: () => z.object({
+		title: z.string(),	
+	}),
+});
+
 const cookiesPage = defineCollection({	
 	loader: glob({ base: './src/content/page/cookies', pattern: '**/*.{md,mdx}' }),	
 	schema: () => z.object({
@@ -60,4 +67,4 @@ const nested = defineCollection({
 	}),
 });
 
-export const collections = { blog, home, aboutUs, termsOfService, privacyPolicy, cookiesPage, cookiesPopup, nested };
+export const collections = { blog, home, aboutUs, termsOfService, privacyPolicy, cookiesPage, cookiesPopup, error404, nested };
