@@ -2,6 +2,7 @@
 import HeaderLink from './HeaderLink.astro';
 import { useTranslations, getTranslatedUrl, getRouteFromTranslatedPath} from "../i18n/utils";
 import type { Lang } from '../i18n/config';
+import ThemeController from './ThemeController.astro';
 
 const currentRoute = getRouteFromTranslatedPath(Astro.url) ?? [];
 
@@ -44,13 +45,13 @@ const switchUk = getTranslatedUrl('uk', currentRoute)
 				UK
 			</a>	
 		</div>
+		<ThemeController/>
 	</nav>
 </header>
 <style>
 	header {
 		margin: 0;
-		padding: 0 1em;
-		background: white;
+		padding: 0 1em;	
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
 	h2 {
