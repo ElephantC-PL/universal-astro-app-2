@@ -74,4 +74,33 @@ const t = useTranslations(lang);
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
 
- <script type="module" src="/src/scripts/theme.js"></script>
+<script>
+  (function() {
+    const THEME_KEY = 'user-theme';
+    const DARK = 'dark';
+    const LIGHT = 'light';
+
+    const stored = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = stored || (prefersDark ? DARK : LIGHT);
+
+    // Wyłącz animację swap tymczasowo
+    const style = document.createElement('style');
+    style.id = 'disable-swap-animation';
+    style.innerHTML = '.swap-on, .swap-off { transition: none !important; }';
+    document.head.appendChild(style);
+
+    // Ustaw theme i checkbox
+    document.documentElement.setAttribute('data-theme', theme);
+  const checkbox = document.querySelector('.theme-controller') as HTMLInputElement | null;
+    if (checkbox) checkbox.checked = theme === DARK;
+
+    // Włącz animację po 50ms
+    setTimeout(() => {
+      const s = document.getElementById('disable-swap-animation');
+      if (s) s.remove();
+    }, 50);
+  })();
+</script>
+
+  <script type="module" src="/src/scripts/theme.js"></script>

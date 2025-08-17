@@ -3,48 +3,36 @@ const ThemeManager = (() => {
   const LIGHT = 'light';
   const DARK = 'dark';
 
-  function getPreferredTheme() {
-    const storedTheme = localStorage.getItem(THEME_KEY);
-    if (storedTheme) return storedTheme;
-
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? DARK : LIGHT;
-  }
-
-  function applyTheme(theme) {
+  // Ustawia theme, synchronizuje checkbox i zapisuje w localStorage
+  const apply = (theme) => {
     document.documentElement.setAttribute('data-theme', theme);
-  }
-
-  function setTheme(theme) {
-    if (theme !== LIGHT && theme !== DARK) return;
-    localStorage.setItem(THEME_KEY, theme);
-    applyTheme(theme);
-    syncCheckbox(theme); 
-  }
-
-  function syncCheckbox(theme) {
     const checkbox = document.querySelector('.theme-controller');
-    if (!checkbox) return;
-    checkbox.checked = theme === DARK; 
-  }
+    if (checkbox) checkbox.checked = theme === DARK;
+    localStorage.setItem(THEME_KEY, theme);
+  };
 
-  function init() {
+  // Pobiera preferowany theme (localStorage lub system)
+  const getPreferredTheme = () => {
+    const stored = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return stored || (prefersDark ? DARK : LIGHT);
+  };
+
+  const init = () => {
     const theme = getPreferredTheme();
-    applyTheme(theme);
-    syncCheckbox(theme);
-   
+    apply(theme);
+
+    // Obsługa zmiany checkboxa
     const checkbox = document.querySelector('.theme-controller');
     if (checkbox) {
-      checkbox.addEventListener('change', () => {
-        setTheme(checkbox.checked ? DARK : LIGHT);
-      });
+      checkbox.addEventListener('change', () => apply(checkbox.checked ? DARK : LIGHT));
     }
-  }
-
-  return {
-    init,
-    setTheme,
   };
+
+  return { init, setTheme: apply };
 })();
 
-document.addEventListener('DOMContentLoaded', ThemeManager.init);
+// Uruchomienie tylko po stronie klienta
+if (typeof window !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', ThemeManager.init);
+}
