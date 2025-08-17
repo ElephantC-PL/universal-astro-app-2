@@ -19,21 +19,20 @@ const ThemeManager = (() => {
     if (theme !== LIGHT && theme !== DARK) return;
     localStorage.setItem(THEME_KEY, theme);
     applyTheme(theme);
-    syncCheckbox(theme); // synchronizacja checkboxa przy zmianie
+    syncCheckbox(theme); 
   }
 
   function syncCheckbox(theme) {
     const checkbox = document.querySelector('.theme-controller');
     if (!checkbox) return;
-    checkbox.checked = theme === DARK; // swap-on będzie aktywny dla dark
+    checkbox.checked = theme === DARK; 
   }
 
   function init() {
     const theme = getPreferredTheme();
     applyTheme(theme);
     syncCheckbox(theme);
-
-    // nasłuchiwanie zmian checkboxa
+   
     const checkbox = document.querySelector('.theme-controller');
     if (checkbox) {
       checkbox.addEventListener('change', () => {
@@ -48,5 +47,4 @@ const ThemeManager = (() => {
   };
 })();
 
-// uruchomienie przy starcie
 document.addEventListener('DOMContentLoaded', ThemeManager.init);
