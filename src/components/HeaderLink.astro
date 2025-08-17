@@ -7,8 +7,8 @@ const { href, class: className, ...props } = Astro.props;
 const pathname = decodeURIComponent(Astro.url.pathname.replace(import.meta.env.BASE_URL, ''));
 const isActive = href === '/' + pathname;
 ---
-<li>
-	<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<li >
+	<a href={href} class={isActive ? 'bg-base-300' : ''}>
 		<slot />
 	</a>
 </li>

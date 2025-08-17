@@ -39,15 +39,21 @@ const switchUk = getTranslatedUrl('uk', currentRoute)
 	</a>
   </div>
   <div class="navbar-center hidden lg:flex">
-    <ul class="menu menu-horizontal px-1">
+    <ul class="menu menu-horizontal space-x-2">
       	<HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
      	<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>
 		<HeaderLink href={aboutLink}>{t('nav.about')}</HeaderLink>
 		<HeaderLink href={nestedLink}>{t('nav.nested')}</HeaderLink>
     </ul>
   </div>
-  <div class="navbar-end">
-    <a class="btn">Button</a>
+  <div class="navbar-end">   
+      <ul class="menu menu-horizontal">
+		<li><a href={switchPL} class={lang === 'pl' ? 'bg-base-300' : ''}>PL</a></li>
+		<li><a href={switchEn} class={lang === 'en' ? 'bg-base-300' : ''}>EN</a></li>
+		<li><a href={switchUk} class={lang === 'uk' ? 'bg-base-300' : ''}>UK</a></li>
+	  </ul>
+    </div>
+	<ThemeController/>
   </div>
 </header>
 <!-- <header>
