@@ -1,8 +1,8 @@
 ---
-import HeaderLink from './HeaderLink.astro';
 import { useTranslations, getTranslatedUrl, getRouteFromTranslatedPath} from "../i18n/utils";
 import type { Lang } from '../i18n/config';
 import ThemeController from './ThemeController.astro';
+import MainMenu from './MainMenu.astro';
 
 const currentRoute = getRouteFromTranslatedPath(Astro.url) ?? [];
 
@@ -11,9 +11,6 @@ const lang = Astro.currentLocale as Lang;
 const t = useTranslations(lang);
 
 const homeLink = getTranslatedUrl(lang)
-const blogLink = getTranslatedUrl(lang, 'blog')
-const aboutLink = getTranslatedUrl(lang, 'aboutUs')
-const nestedLink = getTranslatedUrl(lang, ['deep','deeper', 'nested'])
 const switchPL = getTranslatedUrl('pl', currentRoute)
 const switchEn = getTranslatedUrl('en', currentRoute)
 const switchUk = getTranslatedUrl('uk', currentRoute)
@@ -21,36 +18,21 @@ const switchUk = getTranslatedUrl('uk', currentRoute)
 ---
 <header class="navbar bg-base-100 shadow-sm fixed top-0 left-0 w-full z-50">
   <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+      <label for="my-drawer" tabindex="0" role="button" class="btn btn-ghost lg:hidden drawer-button">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
-      </div>
-      <ul
-        tabindex="0"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
-     	<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>
-		<HeaderLink href={aboutLink}>{t('nav.about')}</HeaderLink>
-		<HeaderLink href={nestedLink}>{t('nav.nested')}</HeaderLink>
-      </ul>
-    </div>
-   	<a href={homeLink} class="btn btn-ghost text-xl">
-		{t('name')}
-	</a>
+      </label>    
+   	<a href={homeLink} class="btn btn-ghost text-xl">{t('name')}</a>
   </div>
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal space-x-2">
-      	<HeaderLink href={homeLink}>{t('nav.home')}</HeaderLink>
-     	<HeaderLink href={blogLink}>{t('nav.blog')}</HeaderLink>
-		<HeaderLink href={aboutLink}>{t('nav.about')}</HeaderLink>
-		<HeaderLink href={nestedLink}>{t('nav.nested')}</HeaderLink>
+      <MainMenu/>
     </ul>
   </div>
   <div class="navbar-end">   
       <ul class="menu menu-horizontal">
-		<li><a href={switchPL} class={lang === 'pl' ? 'bg-base-300' : ''}>PL</a></li>
-		<li><a href={switchEn} class={lang === 'en' ? 'bg-base-300' : ''}>EN</a></li>
-		<li><a href={switchUk} class={lang === 'uk' ? 'bg-base-300' : ''}>UK</a></li>
+        <li><a href={switchPL} class={lang === 'pl' ? 'bg-base-300' : ''}>PL</a></li>
+        <li><a href={switchEn} class={lang === 'en' ? 'bg-base-300' : ''}>EN</a></li>
+        <li><a href={switchUk} class={lang === 'uk' ? 'bg-base-300' : ''}>UK</a></li>
 	  </ul>
     </div>
 	<ThemeController/>

@@ -1,0 +1,14 @@
+---
+import type { Lang } from "../i18n/config";
+import { getTranslatedUrl, useTranslations } from "../i18n/utils";
+import HeaderLink from "./HeaderLink.astro";
+
+const lang = Astro.currentLocale as Lang;
+const t = useTranslations(lang);
+
+---
+
+<HeaderLink href={getTranslatedUrl(lang)}>{t('nav.home')}</HeaderLink>
+<HeaderLink href={getTranslatedUrl(lang, 'blog')}>{t('nav.blog')}</HeaderLink>
+<HeaderLink href={getTranslatedUrl(lang, 'aboutUs')}>{t('nav.about')}</HeaderLink>
+<HeaderLink href={getTranslatedUrl(lang, ['deep','deeper', 'nested'])}>{t('nav.nested')}</HeaderLink>
