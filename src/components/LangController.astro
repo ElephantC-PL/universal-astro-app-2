@@ -1,0 +1,14 @@
+---
+import type { Lang } from "../i18n/config";
+import { getRouteFromTranslatedPath, getTranslatedUrl } from "../i18n/utils";
+
+const currentRoute = getRouteFromTranslatedPath(Astro.url) ?? [];
+const lang = Astro.currentLocale as Lang;
+
+---
+
+<ul class="menu menu-horizontal">
+    <li><a href={getTranslatedUrl('pl', currentRoute)} class={lang === 'pl' ? 'bg-base-300' : ''}>PL</a></li>
+    <li><a href={getTranslatedUrl('en', currentRoute)} class={lang === 'en' ? 'bg-base-300' : ''}>EN</a></li>
+    <li><a href={getTranslatedUrl('uk', currentRoute)} class={lang === 'uk' ? 'bg-base-300' : ''}>UK</a></li>
+</ul>
